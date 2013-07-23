@@ -1,13 +1,7 @@
-<div class="container">
-  <h1>Deaf Grandma</h1>
-  <% if @grandma %>
-    <p>Grandma says: "<span id="grandma_says"><%= @grandma %></span>"</p>
-  <% end %>
+<table class="racer_table">
+  <tr id="p1" class="player strip"></tr>
+  <tr id="p2" class="player strip"></tr>
+</table>
 
-  <form action="/grandma" method="post">
-    Say something to Grandma:
-    <br>
-    <input type="text" name="user_input">
-    <input type="submit" value="Say it!">
-  </form>
-</div>
+<%= erb :_game_start %>
+<%= erb :_stats %>

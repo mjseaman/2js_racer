@@ -1,11 +1,21 @@
 $(document).ready(function(){
-  for (var i=0;i<=track_length();i++){
-    $("tr").append("<td></td>");
-  }
-  initialize_game();
 
-  key_listener();
+  $('#sign_up').modal('show');
 
+  $('#game_start').on('submit',function(){
+    event.preventDefault();
+    $('#sign_up').modal('hide');
+    var form = $(this);
+    console.log(form.serialize());
+    $.ajax({
+      url: this.action,
+      type:this.method,
+      data:form.serialize()
+    }).done(function(game){
+      initialize_game();
+      key_listener();
+    });
+  });
 });
 
 function track_length() {
@@ -13,6 +23,10 @@ function track_length() {
 }
 
 function initialize_game() {
+  for (var i=0;i<=track_length();i++){
+    $("tr").append("<td></td>");
+  }
+
   $('td').removeClass('active');
   $('td:first-child').addClass('active');
 }
@@ -65,9 +79,14 @@ function winner() {
 }
 
 function declare_winner() {
-  alert("Player "+winner()+" wins!");
-  initialize_game();
-  key_listener();
+  $.ajax({
+    url: '/game/end',
+    type: 'post',
+    data: "winner= "+winner()
+  }).done(function(winner) {
+    alert(winner + ' is the winner.')
+    $('#stats').modal('show');
+  })
 }
 
 

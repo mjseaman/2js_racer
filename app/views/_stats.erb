@@ -1,0 +1,22 @@
+<div id="stats" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Valuable Statistics</h3>
+  </div>
+  <div class="modal-body">
+    <table>
+      <tr>
+        <th>Winner</th>
+        <th>Time or something</th>
+      </tr>
+      <% if Game.all.any? %>
+        <% Game.all.each do |game| %> 
+          <tr>
+            <td><%= game.winner %></td>
+            <td><%= game.created_at %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
